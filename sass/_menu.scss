@@ -1,0 +1,117 @@
+
+.menu-btn {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    right: 1rem;
+    width: 28px;
+    height: 20px;
+    cursor: pointer;
+    @include trans;
+
+    &__burger {
+        position: absolute;
+        top: 0.5rem;
+        right: 0;
+        width: 25px;
+        height: 3px;
+        background: set-text-color($primary-color);
+        @include trans;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 28px;
+            top: -8px;
+            height: 3px;
+            background: set-text-color($primary-color);
+            @include trans;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            top: 8px;
+            height: 3px;
+            background: set-text-color($primary-color);
+            @include trans;
+        }
+
+        &.open {
+            transform: rotate(720deg);
+            background: transparent;
+
+            &::before {
+                transform: rotate(45deg) translate(5px, 8px);
+            }
+
+            &::after {
+                width: 28px;
+                transform: rotate(-45deg) translate(3px, -7px);
+            }
+        }
+    }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    opacity: 0.98;
+    visibility: hidden;
+
+    &.open {
+        visibility: visible;
+    }
+
+    &-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column wrap;
+        height: 100vh;
+        overflow: hidden;
+        background: $primary-color;
+        transform: translateY(-100%);
+        @include trans;
+
+        &.open {
+            transform: translateY(0);
+        }
+    }
+
+    &-item {
+        transform: translateX(100vw);
+        @include trans;
+
+        &.open {
+            transform: translateX(0);
+        }
+        &.active > a {
+            color: $secondery-color;
+        }
+    }
+
+    &-link {
+         display: inline-block;
+         font-size: 1.5rem;
+         padding: 2rem 0;
+         font-weight: 200;
+         @include trans;
+
+         &:hover {
+             color: $secondery-color;
+         }
+    }
+
+    @for $i from 1 through 4 {
+        .navbar-item:nth-child(#{$i}) {
+            transition-delay: ($i * 0.1s) + 0.20s;
+        }
+    }
+    
+}
+
+
